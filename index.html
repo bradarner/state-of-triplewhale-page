@@ -6,295 +6,314 @@
   <title>State of Triple Whale</title>
   <style>
     :root {
-      --bg: #050b14;
-      --bg-2: #0a1424;
-      --card: #0e1c2f;
-      --card-border: #1f3651;
-      --text: #e9f3ff;
-      --muted: #9cb3cd;
-      --accent: #44c9ff;
-      --accent-2: #41e4b8;
-      --warning: #ffd166;
-      --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-      --radius-xl: 20px;
-      --radius-lg: 14px;
-      --radius-pill: 999px;
+      --color-background: #050a14;
+      --color-background-end: #0a1424;
+      --color-surface-gradient-start: rgba(18, 32, 52, 0.95);
+      --color-surface-gradient-end: rgba(11, 22, 37, 0.92);
+      --color-border: #213855;
+      --color-text-primary: #e9f3ff;
+      --color-text-secondary: #9cb3cd;
+      --color-accent-primary: #44c9ff;
+      --color-accent-secondary: #41e4b8;
+      --color-accent-secondary-translucent: rgba(65, 228, 184, 0.4);
+      --color-warning-surface: rgba(255, 209, 102, 0.08);
+      --color-warning-border: rgba(255, 209, 102, 0.35);
+      --color-warning-text: #ffe9b2;
+
+      --font-family-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      --font-size-base: 16px;
+      --line-height-base: 1.6;
+
+      --font-size-xs: 0.75rem;
+      --font-size-sm: 0.875rem;
+      --font-size-md: 1rem;
+      --font-size-lg: 1.125rem;
+      --font-size-h1: clamp(2.25rem, 5vw, 3.5rem);
+      --font-size-h2: 1.25rem;
+      --font-size-kpi: clamp(2.5rem, 6vw, 4rem);
+
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --space-3xl: 64px;
+
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-pill: 9999px;
+      --border-width: 1px;
+      --shadow-card: 0 4px 8px rgba(0, 0, 0, 0.2), 0 16px 32px rgba(0, 0, 0, 0.25);
     }
 
-    * { box-sizing: border-box; }
-
-    html, body {
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(1200px 600px at 15% -10%, rgba(68, 201, 255, 0.16), transparent 65%),
-        radial-gradient(900px 500px at 90% 0%, rgba(65, 228, 184, 0.11), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg-2));
-      min-height: 100vh;
     }
 
-    .grain {
+    html { font-size: var(--font-size-base); }
+
+    body {
+      font-family: var(--font-family-sans);
+      color: var(--color-text-primary);
+      background:
+        radial-gradient(1200px 600px at 15% -10%, rgba(68, 201, 255, 0.1), transparent 65%),
+        radial-gradient(900px 500px at 90% 0%, rgba(65, 228, 184, 0.08), transparent 60%),
+        linear-gradient(180deg, var(--color-background), var(--color-background-end));
+      min-height: 100vh;
+      line-height: var(--line-height-base);
+    }
+
+    .grain-overlay {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.08;
-      background-image:
-        radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0);
-      background-size: 3px 3px;
-      mix-blend-mode: soft-light;
+      opacity: 0.05;
+      background-image: radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0);
+      background-size: 4px 4px;
+      mix-blend-mode: screen;
     }
 
-    .wrap {
+    .container {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 44px 20px 72px;
+      padding: var(--space-3xl) var(--space-lg);
       position: relative;
       z-index: 1;
     }
 
-    .hero {
-      border: 1px solid var(--card-border);
-      background: linear-gradient(165deg, rgba(15, 31, 51, 0.92), rgba(10, 21, 37, 0.92));
-      border-radius: var(--radius-xl);
-      padding: 34px;
-      box-shadow: var(--shadow);
-      margin-bottom: 22px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-2);
-      border: 1px solid rgba(65, 228, 184, 0.4);
-      border-radius: var(--radius-pill);
-      padding: 6px 11px;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(1.75rem, 4vw, 2.8rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .sub {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 1.03rem;
-      max-width: 72ch;
-    }
-
-    .targets {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 14px;
-      margin-top: 24px;
-    }
-
-    .target-card {
-      border: 1px solid #274364;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(16, 40, 66, 0.9), rgba(14, 29, 48, 0.9));
-      padding: 16px;
-    }
-
-    .target-label {
-      margin: 0;
-      color: #b6cae2;
-      font-size: 0.86rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-    }
-
-    .target-value {
-      margin: 8px 0 2px;
-      font-size: clamp(1.25rem, 2.8vw, 1.85rem);
-      font-weight: 800;
-      color: var(--accent-2);
-      line-height: 1.2;
-    }
-
-    .target-time {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .flow {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .step {
-      border: 1px solid #25425f;
-      border-radius: 12px;
-      background: rgba(12, 27, 44, 0.75);
-      padding: 12px;
-    }
-
-    .step-kicker {
-      margin: 0;
-      font-size: 0.72rem;
-      color: #7ec9ff;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-    }
-
-    .step-title {
-      margin: 6px 0 0;
-      font-size: 0.96rem;
-      line-height: 1.3;
-    }
+    h1, h2 { line-height: 1.2; letter-spacing: -0.02em; }
+    h1 { font-size: var(--font-size-h1); margin-bottom: var(--space-md); }
+    h2 { font-size: var(--font-size-h2); }
 
     .section-title {
-      margin: 28px 0 12px;
-      color: #c9def4;
-      font-size: 0.92rem;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+    }
+
+    .hero {
+      border: var(--border-width) solid var(--color-border);
+      background: linear-gradient(165deg, rgba(15, 31, 51, 0.85), rgba(10, 21, 37, 0.85));
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      box-shadow: var(--shadow-card);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .eyebrow-tag {
+      display: inline-block;
+      font-size: var(--font-size-xs);
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: var(--color-accent-secondary);
+      border: var(--border-width) solid var(--color-accent-secondary-translucent);
+      border-radius: var(--radius-pill);
+      padding: var(--space-xs) var(--space-sm);
+      margin-bottom: var(--space-lg);
       font-weight: 700;
     }
 
-    .grid {
+    .hero-subtitle {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-lg);
+      max-width: 70ch;
+      margin-bottom: var(--space-xl);
+    }
+
+    .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-xl);
     }
 
-    .card {
-      border: 1px solid var(--card-border);
+    .kpi-card {
+      border: var(--border-width) solid #274364;
       border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(13, 27, 45, 0.95), rgba(11, 22, 37, 0.92));
-      padding: 17px 17px 15px;
+      background: linear-gradient(180deg, rgba(16, 40, 66, 0.9), rgba(14, 29, 48, 0.9));
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
     }
 
-    h2 {
-      margin: 0 0 10px;
-      color: var(--accent);
-      font-size: 1.02rem;
-      letter-spacing: 0.01em;
+    .kpi-label {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: var(--space-sm);
     }
 
-    ul {
-      margin: 0;
-      padding: 0;
+    .kpi-value {
+      font-size: var(--font-size-kpi);
+      font-weight: 800;
+      background: linear-gradient(45deg, var(--color-accent-secondary), var(--color-accent-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      margin-bottom: var(--space-xs);
+    }
+
+    .kpi-timeframe {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+
+    .flow-step {
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: rgba(12, 27, 44, 0.75);
+      padding: var(--space-md);
+    }
+
+    .flow-step__number {
+      font-size: var(--font-size-xs);
+      color: var(--color-accent-primary);
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .flow-step__title {
+      font-size: var(--font-size-md);
+      line-height: 1.4;
+      color: var(--color-text-primary);
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .info-card {
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, var(--color-surface-gradient-start), var(--color-surface-gradient-end));
+      padding: var(--space-lg);
+    }
+
+    .info-card__title {
+      color: var(--color-accent-primary);
+      margin-bottom: var(--space-md);
+    }
+
+    .info-card ul {
       list-style: none;
       display: grid;
-      gap: 8px;
+      gap: var(--space-md);
     }
 
-    li {
+    .info-card li {
       position: relative;
-      padding-left: 18px;
-      color: #deebf9;
-      line-height: 1.4;
+      padding-left: var(--space-lg);
+      color: var(--color-text-primary);
+      font-size: var(--font-size-md);
     }
 
-    li::before {
-      content: "";
+    .info-card li::before {
+      content: '✔';
       position: absolute;
       left: 0;
-      top: 0.55em;
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 0 3px rgba(68, 201, 255, 0.14);
+      top: 2px;
+      color: var(--color-accent-secondary);
+      font-weight: 700;
     }
 
-    .note {
-      margin-top: 16px;
-      color: var(--muted);
-      font-size: 0.9rem;
+    .callout-note {
+      margin-top: var(--space-2xl);
+      border: var(--border-width) solid var(--color-warning-border);
+      border-radius: var(--radius-md);
+      background: var(--color-warning-surface);
+      padding: var(--space-md);
+      color: var(--color-warning-text);
+      font-size: var(--font-size-md);
+    }
+
+    .footer-note {
+      margin-top: var(--space-xl);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
       text-align: center;
     }
 
-    .nudge {
-      margin-top: 16px;
-      border: 1px solid rgba(255, 209, 102, 0.35);
-      border-radius: 12px;
-      background: rgba(255, 209, 102, 0.08);
-      padding: 10px 12px;
-      color: #ffe9b2;
-      font-size: 0.9rem;
+    @media (max-width: 900px) {
+      .flow-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    @media (max-width: 860px) {
-      .flow {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 620px) {
-      .hero { padding: 24px 18px; }
-      .flow { grid-template-columns: 1fr; }
-      .wrap { padding: 28px 14px 48px; }
+    @media (max-width: 600px) {
+      .container { padding: var(--space-xl) var(--space-md); }
+      .hero { padding: var(--space-xl); }
+      .flow-grid, .kpi-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
-  <main class="wrap">
+  <div class="grain-overlay" aria-hidden="true"></div>
+  <main class="container">
     <section class="hero" aria-label="State of Triple Whale overview">
-      <span class="eyebrow">Recurring Shareout</span>
+      <span class="eyebrow-tag">Recurring Shareout</span>
       <h1>State of Triple Whale</h1>
-      <p class="sub">Recurring shareout for product + design + design research. Align the team on owners, reporting cadence, and one source of truth that supports faster decisions.</p>
+      <p class="hero-subtitle">Recurring shareout for product + design + design research. Align the team on owners, reporting cadence, and one source of truth that supports faster decisions.</p>
 
-      <div class="targets" aria-label="May targets">
-        <article class="target-card">
-          <p class="target-label">Primary Goal</p>
-          <p class="target-value">150 customers</p>
-          <p class="target-time">by end of May</p>
+      <div class="kpi-grid" aria-label="May targets">
+        <article class="kpi-card">
+          <p class="kpi-label">Primary Goal</p>
+          <p class="kpi-value">150 customers</p>
+          <p class="kpi-timeframe">by end of May</p>
         </article>
-        <article class="target-card">
-          <p class="target-label">Revenue Goal</p>
-          <p class="target-value">$2M incremental revenue</p>
-          <p class="target-time">by end of May</p>
+        <article class="kpi-card">
+          <p class="kpi-label">Revenue Goal</p>
+          <p class="kpi-value">$2M incremental revenue</p>
+          <p class="kpi-timeframe">by end of May</p>
         </article>
       </div>
 
-      <div class="section-title">Operating Story</div>
-      <div class="flow" aria-label="Operating sequence">
-        <article class="step">
-          <p class="step-kicker">01</p>
-          <p class="step-title">Focus product motion on <strong>Moby</strong> + <strong>AMB</strong></p>
+      <p class="section-title">Operating Story</p>
+      <div class="flow-grid" aria-label="Operating sequence">
+        <article class="flow-step">
+          <p class="flow-step__number">Phase 01</p>
+          <p class="flow-step__title">Focus product motion on <strong>Moby</strong> + <strong>AMB</strong></p>
         </article>
-        <article class="step">
-          <p class="step-kicker">02</p>
-          <p class="step-title">Tighten engagement loop and acquisition loop</p>
+        <article class="flow-step">
+          <p class="flow-step__number">Phase 02</p>
+          <p class="flow-step__title">Tighten engagement loop and acquisition loop</p>
         </article>
-        <article class="step">
-          <p class="step-kicker">03</p>
-          <p class="step-title">Run daily onboarding + research operating cadence</p>
+        <article class="flow-step">
+          <p class="flow-step__number">Phase 03</p>
+          <p class="flow-step__title">Run daily onboarding + research operating cadence</p>
         </article>
-        <article class="step">
-          <p class="step-kicker">04</p>
-          <p class="step-title">Escalate blockers fast so leadership can unblock</p>
+        <article class="flow-step">
+          <p class="flow-step__number">Phase 04</p>
+          <p class="flow-step__title">Escalate blockers fast so leadership can unblock</p>
         </article>
       </div>
     </section>
 
-    <div class="grid">
-      <section class="card">
-        <h2>Core Offerings</h2>
+    <div class="main-grid">
+      <section class="info-card">
+        <h2 class="info-card__title">Core Offerings</h2>
         <ul>
           <li><strong>Moby</strong>: central strategic/business advisor and intelligence brain</li>
           <li><strong>AMB</strong>: automated media buyer use-case layer built on the core capability</li>
         </ul>
       </section>
 
-      <section class="card">
-        <h2>Operating Focus</h2>
+      <section class="info-card">
+        <h2 class="info-card__title">Operating Focus</h2>
         <ul>
           <li>Tight <strong>engagement loops</strong> in app (Moby + AMB)</li>
           <li>Tight <strong>acquisition loops</strong> to feed the right cohorts</li>
@@ -302,8 +321,8 @@
         </ul>
       </section>
 
-      <section class="card">
-        <h2>Team Ownership</h2>
+      <section class="info-card">
+        <h2 class="info-card__title">Team Ownership</h2>
         <ul>
           <li><strong>Disha + YBK + Maureen</strong>: onboarding/customer research operations</li>
           <li><strong>Brad</strong>: executive sponsor, narrative + priority decisions</li>
@@ -311,8 +330,8 @@
         </ul>
       </section>
 
-      <section class="card">
-        <h2>What We Need Daily</h2>
+      <section class="info-card">
+        <h2 class="info-card__title">What We Need Daily</h2>
         <ul>
           <li>Who is onboarding now (owner + cohort)</li>
           <li>What each customer is being onboarded to</li>
@@ -322,8 +341,8 @@
       </section>
     </div>
 
-    <div class="nudge"><strong>Meeting intent:</strong> leave with clear owners, fixed report format, and daily cadence everyone trusts.</div>
-    <p class="note">Version 0.2 — visual refresh for executive shareout context.</p>
+    <div class="callout-note"><strong>Meeting intent:</strong> leave with clear owners, fixed report format, and daily cadence everyone trusts.</div>
+    <p class="footer-note">Version 0.3 — Gemini Pro refinement pass.</p>
   </main>
 </body>
 </html>
