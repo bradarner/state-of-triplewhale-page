@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>State of Triple Whale</title>
+  <style>
+    :root {
+      --bg:#07111a; --card:#0f1f2e; --text:#e8f3ff; --muted:#a9bfd4; --accent:#38c5ff; --accent2:#4ce3b3;
+    }
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:linear-gradient(180deg,#061019,#0b1622);color:var(--text);}
+    .wrap{max-width:980px;margin:0 auto;padding:40px 20px 64px;}
+    h1{font-size:2rem;margin:0 0 6px}.sub{color:var(--muted);margin-bottom:28px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .card{background:var(--card);border:1px solid #1f3448;border-radius:14px;padding:16px}
+    h2{font-size:1.05rem;margin:0 0 10px;color:var(--accent)}
+    ul{margin:8px 0 0 20px;padding:0} li{margin:6px 0;color:#d8e8f8}
+    .kpi{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
+    .pill{background:#102739;border:1px solid #1f4e69;border-radius:999px;padding:10px 14px;font-weight:600}
+    .pill span{color:var(--accent2)}
+    .note{margin-top:24px;color:var(--muted);font-size:.95rem}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>State of Triple Whale</h1>
+    <div class="sub">Recurring shareout for product + design + design research</div>
+
+    <div class="kpi">
+      <div class="pill">Target: <span>150 customers</span> by end of May</div>
+      <div class="pill">Target: <span>$2M incremental revenue</span> by end of May</div>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Core Offerings</h2>
+        <ul>
+          <li><strong>Moby</strong>: central strategic/business advisor and intelligence brain</li>
+          <li><strong>AMB</strong>: automated media buyer use-case layer built on the core capability</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Operating Focus</h2>
+        <ul>
+          <li>Tight <strong>engagement loops</strong> in app (Moby + AMB)</li>
+          <li>Tight <strong>acquisition loops</strong> to feed the right cohorts</li>
+          <li>Focus means explicit "not now" decisions</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Team Ownership</h2>
+        <ul>
+          <li><strong>Disha + YBK + Maureen</strong>: onboarding/customer research operations</li>
+          <li><strong>Brad</strong>: executive sponsor, narrative + priority decisions</li>
+          <li><strong>Sebastian</strong>: coordination, blocker tracking, daily feedback loop</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>What We Need Daily</h2>
+        <ul>
+          <li>Who is onboarding now (owner + cohort)</li>
+          <li>What each customer is being onboarded to</li>
+          <li>Where each customer is in activation/engagement loop</li>
+          <li>Top friction points + immediate fixes</li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="note">Version 0.1 — simple working page to anchor meeting context and expectations.</p>
+  </div>
+</body>
+</html>
